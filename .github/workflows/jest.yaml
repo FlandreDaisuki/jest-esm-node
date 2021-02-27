@@ -16,7 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          path: ${{ matrix.branch }}
+          ref: ${{ matrix.branch }}
       - name: Setup node
         uses: actions/setup-node@v2
         with:
