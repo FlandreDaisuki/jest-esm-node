@@ -1,0 +1,25 @@
+name: Run Jest
+
+on:
+  schedule:
+    - cron: '01 23 * * *'
+  push:
+
+jobs:
+  build:
+    runs-on: ubuntu-16.04
+    strategy:
+      matrix:
+        node: ['14', '15']
+        branch: ['master']
+    name: Node ${{ matrix.node }} @${{ matrix.branch }}
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          path: ${{ matrix.branch }}
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node }}
+      - run: npm install
+      - run: npm test
